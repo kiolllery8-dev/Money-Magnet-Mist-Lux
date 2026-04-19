@@ -1493,7 +1493,7 @@ for(let i=0;i<24;i++){
 const cl = document.getElementById('coins');
 const coinSizes = ['small','','','big'];
 // Stationary twinkling coins
-for(let i=0;i<28;i++){
+for(let i=0;i<14;i++){
   const c = document.createElement('span');
   c.className = 'coin ' + coinSizes[Math.floor(Math.random()*coinSizes.length)];
   c.style.left = Math.random()*100 + 'vw';
@@ -1503,7 +1503,7 @@ for(let i=0;i<28;i++){
   cl.appendChild(c);
 }
 // Drifting coins that float upward
-for(let i=0;i<10;i++){
+for(let i=0;i<5;i++){
   const c = document.createElement('span');
   c.className = 'coin drift ' + coinSizes[Math.floor(Math.random()*coinSizes.length)];
   c.style.left = Math.random()*100 + 'vw';
