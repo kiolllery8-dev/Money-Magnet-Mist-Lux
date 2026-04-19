@@ -95,8 +95,8 @@ a{color:inherit;text-decoration:none;}
   border:1px dashed rgba(139,105,20,.55);
 }
 .coin::after{
-  content:'￥';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  color:rgba(139,105,20,.85);font-size:11px;font-weight:900;font-family:serif;
+  content:'$';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(139,105,20,.9);font-size:13px;font-weight:900;font-family:'Playfair Display',serif;
   text-shadow:0 0 2px rgba(255,243,176,.6);
 }
 .coin.small{width:8px;height:8px;}
@@ -206,86 +206,15 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
   border:1px dashed rgba(74,52,16,.55);
 }
 .nav-coin::after{
-  content:'￥';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  color:#4a3410;font-size:11px;font-weight:900;font-family:serif;
+  content:'$';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#4a3410;font-size:13px;font-weight:900;font-family:'Playfair Display',serif;
   text-shadow:0 1px 0 rgba(255,243,200,.5);
 }
 @keyframes navCoinShimmer{
   0%,100%{filter:brightness(1);}
   50%{filter:brightness(1.2);transform:rotate(8deg);}
 }
-/* Floating sticky CTA · 發財金 coin button (top layer, always big) */
-.floating-cta{
-  position:fixed;z-index:9999;
-  right:22px;bottom:26px;
-  width:88px;height:88px;padding:0;
-  display:inline-flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 32% 28%,#fff3b0 0%,#ecc980 22%,#d1a84b 55%,#a9802f 85%,#8b6914 100%);
-  color:#4a3410;
-  font-family:'Noto Serif TC','Playfair Display',serif;
-  font-weight:900;
-  font-size:20px;
-  letter-spacing:0;line-height:1;
-  text-decoration:none;
-  border:3px solid #b8941f;
-  box-shadow:
-    0 0 0 2px rgba(255,243,176,.5) inset,
-    0 0 0 4px rgba(139,105,20,.6),
-    0 0 18px rgba(236,201,128,.9),
-    0 0 38px rgba(209,168,75,.6),
-    0 12px 24px rgba(0,0,0,.55);
-  cursor:pointer;
-  animation:coinFloat 3.2s ease-in-out infinite, coinSpin360 18s linear infinite;
-  transition:transform .3s ease, box-shadow .3s ease, opacity .4s;
-}
-.floating-cta::before{
-  content:'';position:absolute;inset:8px;border-radius:50%;
-  border:1.5px dashed rgba(74,52,16,.55);
-  pointer-events:none;
-}
-.floating-cta::after{
-  content:'';position:absolute;top:12%;left:18%;width:30%;height:22%;
-  background:radial-gradient(ellipse at center,rgba(255,243,200,.85) 0%,rgba(255,243,200,0) 70%);
-  border-radius:50%;pointer-events:none;filter:blur(2px);
-  animation:coinShine 3.2s ease-in-out infinite;
-}
-.floating-cta .fc-coin{
-  position:relative;z-index:2;
-  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:0;
-  text-shadow:0 1px 0 rgba(255,243,200,.6), 0 -1px 0 rgba(74,52,16,.35);
-}
-.floating-cta .fc-text{
-  display:block;
-  font-size:20px;font-weight:900;letter-spacing:.05em;
-  white-space:nowrap;
-}
-.floating-cta:hover{
-  transform:scale(1.08);
-  box-shadow:
-    0 0 0 2px rgba(255,243,200,.7) inset,
-    0 0 0 4px rgba(139,105,20,.7),
-    0 0 24px rgba(236,201,128,1),
-    0 0 52px rgba(236,201,128,.8),
-    0 16px 30px rgba(0,0,0,.6);
-}
-.floating-cta.in-cta{opacity:0;pointer-events:none;transform:scale(.4);}
-
-@keyframes coinFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
-@keyframes coinSpin360{
-  0%{filter:brightness(1);}
-  50%{filter:brightness(1.15);}
-  100%{filter:brightness(1);}
-}
-@keyframes coinShine{
-  0%,100%{opacity:.8;}
-  50%{opacity:1;transform:translate(2px,-1px);}
-}
+/* (Floating 發財金 coin removed) */
 
 /* ── HERO ── */
 .hero{
@@ -777,10 +706,6 @@ footer{
   .footer-brand{font-size:18px;}
   .footer-sub{font-size:12px;letter-spacing:.2em;}
   .footer-meta{font-size:11px;}
-
-  /* Floating 發財金 coin */
-  .floating-cta{right:14px;bottom:16px;width:72px;height:72px;font-size:17px;}
-  .floating-cta .fc-text{font-size:17px;}
 }
 
 /* ── SMALL PHONES (SE / Mini) ── */
@@ -794,8 +719,6 @@ footer{
   .price-num{font-size:54px;}
   .nav-brand{font-size:14px;}
   .nav-buy{padding:6px 11px 6px 8px;font-size:12px;}
-  .floating-cta{width:62px;height:62px;font-size:15px;}
-  .floating-cta .fc-text{font-size:15px;}
 }
 </style>
 </head>
@@ -817,13 +740,6 @@ footer{
     <span class="nav-buy-text">購買</span>
   </a>
 </nav>
-
-<!-- Floating sticky CTA · 發財金 coin -->
-<a href="#cta" class="floating-cta" id="floatingCta" aria-label="發財金 · 立即入手">
-  <span class="fc-coin">
-    <span class="fc-text">發財金</span>
-  </span>
-</a>
 
 <!-- HERO -->
 <section class="hero">
@@ -1277,22 +1193,9 @@ for(let i=0;i<10;i++){
 
 // Nav scroll
 const nav = document.getElementById('nav');
-const fcta = document.getElementById('floatingCta');
-const ctaSection = document.getElementById('cta');
-function onScroll(){
-  const y = window.scrollY;
-  nav.classList.toggle('scrolled', y > 40);
-  if(fcta && ctaSection){
-    // Hide dot when the actual CTA button area is on-screen
-    const rect = ctaSection.getBoundingClientRect();
-    const inCta = rect.top < window.innerHeight * 0.6 && rect.bottom > 0;
-    fcta.classList.toggle('in-cta', inCta);
-  }
-}
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
-
-// (Floating 發財金 coin links directly to #cta — no toggle needed)
+window.addEventListener('scroll', ()=>{
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive:true});
 
 // Video fallback
 const v = document.getElementById('heroVideo');
