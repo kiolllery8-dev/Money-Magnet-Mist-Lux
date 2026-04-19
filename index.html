@@ -563,18 +563,82 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
 }
 .price-unit{color:var(--gold);font-size:41px;}
 .cta-btn{
-  display:inline-block;background:var(--gold);color:var(--black);
-  padding:22px 68px;font-size:22px;letter-spacing:.3em;font-weight:600;
-  border:none;cursor:pointer;transition:.3s;font-family:'Noto Sans TC',sans-serif;
-  position:relative;overflow:hidden;
+  display:inline-block;
+  background:linear-gradient(145deg,#ecc980 0%,#d1a84b 45%,#b8941f 100%);
+  color:#2a1d05;
+  padding:22px 68px;font-size:22px;letter-spacing:.3em;font-weight:700;
+  border:none;cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  font-family:'Noto Sans TC',sans-serif;
+  position:relative;overflow:visible;
+  border-radius:4px;
+  box-shadow:
+    0 0 0 1px rgba(255,243,176,.55) inset,
+    0 0 0 2px #b8941f,
+    0 0 24px rgba(236,201,128,.8),
+    0 0 60px rgba(209,168,75,.55),
+    0 14px 34px rgba(0,0,0,.55);
+  animation:ctaBtnPulse 2.4s ease-in-out infinite;
+  text-shadow:0 1px 0 rgba(255,243,200,.5);
 }
 .cta-btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
-  transform:translateX(-100%);transition:.6s;
+  content:'';position:absolute;inset:0;overflow:hidden;border-radius:inherit;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.55) 50%,transparent 100%);
+  transform:translateX(-120%);
+  animation:ctaShine 3s ease-in-out infinite;
+  pointer-events:none;
 }
-.cta-btn:hover::before{transform:translateX(100%);}
-.cta-btn:hover{background:var(--gold-bright);box-shadow:0 20px 60px rgba(209,168,75,.4);}
+.cta-btn::after{
+  content:'';position:absolute;inset:-6px;border-radius:10px;pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse at center,rgba(236,201,128,.55) 0%,rgba(236,201,128,0) 70%);
+  filter:blur(12px);opacity:.9;
+  animation:ctaHalo 2.4s ease-in-out infinite;
+}
+.cta-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  filter:brightness(1.08);
+  box-shadow:
+    0 0 0 1px rgba(255,243,200,.7) inset,
+    0 0 0 2px #d1a84b,
+    0 0 36px rgba(236,201,128,1),
+    0 0 90px rgba(236,201,128,.7),
+    0 20px 44px rgba(0,0,0,.6);
+}
+.cta-btn:active{transform:translateY(0) scale(.98);}
+@keyframes ctaBtnPulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,243,176,.55) inset,0 0 0 2px #b8941f,0 0 24px rgba(236,201,128,.8),0 0 60px rgba(209,168,75,.55),0 14px 34px rgba(0,0,0,.55);}
+  50%{box-shadow:0 0 0 1px rgba(255,243,200,.7) inset,0 0 0 2px #d1a84b,0 0 34px rgba(236,201,128,1),0 0 86px rgba(236,201,128,.7),0 14px 34px rgba(0,0,0,.55);}
+}
+@keyframes ctaShine{
+  0%{transform:translateX(-120%);}
+  55%{transform:translateX(120%);}
+  100%{transform:translateX(120%);}
+}
+@keyframes ctaHalo{
+  0%,100%{opacity:.75;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.06);}
+}
+
+/* Jackpot coin burst */
+.burst-layer{
+  position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;
+}
+.burst-coin{
+  position:absolute;width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff3b0 0%,#ecc980 25%,#d1a84b 55%,#8b6914 100%);
+  border:2px solid #8b6914;
+  box-shadow:
+    0 0 10px rgba(236,201,128,.95),
+    0 0 24px rgba(209,168,75,.7),
+    inset 0 0 0 2px rgba(255,243,200,.4);
+  display:flex;align-items:center;justify-content:center;
+  color:#4a3410;font-weight:900;font-family:'Playfair Display',serif;font-size:15px;
+  text-shadow:0 1px 0 rgba(255,243,200,.5);
+  will-change:transform,opacity;
+}
+.burst-coin::before{
+  content:'$';display:block;line-height:1;
+}
 .cta-note{color:var(--cream-dim);font-size:18px;letter-spacing:.15em;margin-top:30px;}
 .cta-badges{
   margin-top:40px;display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
@@ -1137,7 +1201,7 @@ footer{
       <span class="price-num">388</span>
       <span class="price-unit">元</span>
     </div>
-    <button class="cta-btn" onclick="alert('即將為您跳轉訂購頁面 · 感謝您的選擇');">立 即 入 手 · 啟 動 財 運</button>
+    <button class="cta-btn" id="ctaBtn" type="button">立 即 入 手 · 啟 動 財 運</button>
     <p class="cta-note">✦ IFA 認證配方 · 高濃縮植物精油 · 輕輕一噴立即切換財富頻率 ✦</p>
     <div class="cta-badges">
       <span class="cta-badge">岩蘭草 · 正財</span>
@@ -1196,6 +1260,51 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', ()=>{
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, {passive:true});
+
+// Jackpot coin burst on CTA click
+(function(){
+  const btn = document.getElementById('ctaBtn');
+  if(!btn) return;
+  let layer = document.querySelector('.burst-layer');
+  if(!layer){
+    layer = document.createElement('div');
+    layer.className = 'burst-layer';
+    document.body.appendChild(layer);
+  }
+  function burst(cx, cy){
+    const N = 36;
+    for(let i=0;i<N;i++){
+      const c = document.createElement('span');
+      c.className = 'burst-coin';
+      const size = 14 + Math.random()*20; // 14–34 px
+      c.style.width = c.style.height = size + 'px';
+      c.style.fontSize = Math.max(10, size*0.55) + 'px';
+      c.style.left = (cx - size/2) + 'px';
+      c.style.top  = (cy - size/2) + 'px';
+      const dx = (Math.random()*2 - 1) * 260;       // horizontal spread
+      const up = -(380 + Math.random()*340);         // upward force
+      const fall = 600 + Math.random()*300;          // fall below viewport
+      const rot = (Math.random()*2-1) * 720;         // spin
+      const dur = 1400 + Math.random()*900;          // ms
+      c.animate([
+        { transform:'translate(0,0) rotate(0deg)',   opacity:1 },
+        { transform:`translate(${dx*0.6}px, ${up}px) rotate(${rot*0.6}deg)`, opacity:1, offset:.45 },
+        { transform:`translate(${dx}px, ${fall}px) rotate(${rot}deg)`, opacity:0 }
+      ], { duration:dur, easing:'cubic-bezier(.22,1,.36,1)', fill:'forwards' });
+      layer.appendChild(c);
+      setTimeout(()=>c.remove(), dur + 100);
+    }
+    // Quick flash on the button
+    btn.animate([
+      { filter:'brightness(1.4)', transform:'scale(1.05)' },
+      { filter:'brightness(1)',   transform:'scale(1)' }
+    ], { duration:450, easing:'ease-out' });
+  }
+  btn.addEventListener('click', (e)=>{
+    const r = btn.getBoundingClientRect();
+    burst(r.left + r.width/2, r.top + r.height/2);
+  });
+})();
 
 // Video fallback
 const v = document.getElementById('heroVideo');
