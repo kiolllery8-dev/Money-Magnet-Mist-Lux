@@ -165,40 +165,60 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
   color:var(--gold);font-size:24px;letter-spacing:.15em;
 }
 .nav-brand small{display:block;font-size:24px;color:var(--cream-dim);letter-spacing:.3em;font-style:normal;margin-top:2px;}
-/* Floating sticky CTA - pill at bottom right */
+/* Floating sticky CTA — collapsed dot that expands on tap */
 .floating-cta{
   position:fixed;z-index:60;
-  right:22px;bottom:28px;
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 22px;
+  right:20px;bottom:22px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;padding:0;
+  background:radial-gradient(circle at 35% 30%,#fff3b0 0%,#ecc980 25%,#d1a84b 55%,#8b6914 100%);
+  color:transparent;
+  font-family:'Noto Sans TC',sans-serif;
+  font-size:0;font-weight:700;letter-spacing:0;
+  border-radius:50%;
+  border:1px solid rgba(236,201,128,.6);
+  box-shadow:
+    0 0 12px rgba(236,201,128,.9),
+    0 0 28px rgba(209,168,75,.55),
+    0 4px 10px rgba(0,0,0,.5);
+  overflow:hidden;white-space:nowrap;
+  cursor:pointer;
+  transition:width .4s cubic-bezier(.2,.8,.2,1), height .4s cubic-bezier(.2,.8,.2,1),
+             padding .4s cubic-bezier(.2,.8,.2,1), font-size .3s ease, color .3s ease,
+             border-radius .4s ease, letter-spacing .3s ease, opacity .4s ease, transform .3s ease;
+  animation:fcDotPulse 2.2s ease-in-out infinite;
+}
+.floating-cta .fc-icon,.floating-cta .fc-text{display:none;}
+/* Hide dot inside CTA section to not overlap the real button */
+.floating-cta.in-cta{opacity:0;pointer-events:none;transform:scale(.6);}
+
+/* Expanded state */
+.floating-cta.expanded{
+  width:auto;height:auto;padding:13px 22px;
   background:linear-gradient(145deg,var(--gold),#b8941f);
   color:var(--black);
-  font-family:'Noto Sans TC',sans-serif;
-  font-size:18px;font-weight:700;letter-spacing:.25em;
+  font-size:17px;letter-spacing:.25em;
   border-radius:50px;
+  border-color:transparent;
   box-shadow:
-    0 10px 28px rgba(0,0,0,.55),
+    0 12px 32px rgba(0,0,0,.6),
     0 0 0 1px rgba(236,201,128,.5),
-    0 0 24px rgba(209,168,75,.45);
-  transition:transform .3s ease, box-shadow .3s ease, opacity .4s ease;
-  opacity:0;transform:translateY(20px);
-  cursor:pointer;
+    0 0 32px rgba(209,168,75,.55);
+  animation:none;
 }
-.floating-cta.visible{opacity:1;transform:translateY(0);}
-.floating-cta:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:
-    0 14px 36px rgba(0,0,0,.6),
-    0 0 0 1px var(--gold-bright),
-    0 0 32px rgba(236,201,128,.6);
+.floating-cta.expanded .fc-icon{
+  display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.18);border-radius:50%;font-size:12px;
+  margin-right:8px;
+  animation:fcPulse 1.6s ease-in-out infinite;
 }
-.floating-cta .fc-icon{
-  display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.15);border-radius:50%;
-  font-size:13px;
-  animation:fcPulse 1.8s ease-in-out infinite;
+.floating-cta.expanded .fc-text{display:inline;}
+.floating-cta.expanded:hover{transform:translateY(-2px) scale(1.03);}
+
+@keyframes fcDotPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 12px rgba(236,201,128,.9),0 0 28px rgba(209,168,75,.55),0 4px 10px rgba(0,0,0,.5);}
+  50%{transform:scale(1.3);box-shadow:0 0 18px rgba(236,201,128,1),0 0 42px rgba(209,168,75,.8),0 4px 10px rgba(0,0,0,.5);}
 }
-.floating-cta .fc-text{padding-right:4px;}
 @keyframes fcPulse{
   0%,100%{transform:scale(1);opacity:.85;}
   50%{transform:scale(1.18);opacity:1;}
@@ -604,8 +624,9 @@ footer{
   .nav{padding:14px 20px;}
   .nav-brand{font-size:20px;}
   .nav-brand small{font-size:22px;}
-  .floating-cta{right:14px;bottom:16px;padding:11px 18px;font-size:15px;letter-spacing:.2em;}
-  .floating-cta .fc-icon{width:20px;height:20px;font-size:11px;}
+  .floating-cta{right:12px;bottom:14px;width:14px;height:14px;}
+  .floating-cta.expanded{padding:11px 18px;font-size:14px;letter-spacing:.2em;}
+  .floating-cta.expanded .fc-icon{width:18px;height:18px;font-size:10px;}
   .pillar{padding:36px 24px 30px;}
   .pillar-type{font-size:36px;}
   .pillar-zh{font-size:28px;margin-bottom:20px;}
@@ -1098,27 +1119,46 @@ for(let i=0;i<10;i++){
   cl.appendChild(c);
 }
 
-// Nav scroll + floating CTA visibility
+// Nav scroll
 const nav = document.getElementById('nav');
 const fcta = document.getElementById('floatingCta');
 const ctaSection = document.getElementById('cta');
 function onScroll(){
   const y = window.scrollY;
   nav.classList.toggle('scrolled', y > 40);
-  if(fcta){
-    // Show after scrolling past ~60% of viewport
-    const show = y > window.innerHeight * 0.6;
-    // Hide when user has reached the CTA section (don't overlap the real button)
-    let inCta = false;
-    if(ctaSection){
-      const rect = ctaSection.getBoundingClientRect();
-      inCta = rect.top < window.innerHeight * 0.6 && rect.bottom > 0;
-    }
-    fcta.classList.toggle('visible', show && !inCta);
+  if(fcta && ctaSection){
+    // Hide dot when the actual CTA button area is on-screen
+    const rect = ctaSection.getBoundingClientRect();
+    const inCta = rect.top < window.innerHeight * 0.6 && rect.bottom > 0;
+    fcta.classList.toggle('in-cta', inCta);
   }
 }
 window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
+
+// Floating CTA tap behavior: first tap expands, second tap follows link
+if(fcta){
+  let collapseTimer = null;
+  const collapse = () => fcta.classList.remove('expanded');
+  const expand = () => {
+    fcta.classList.add('expanded');
+    clearTimeout(collapseTimer);
+    collapseTimer = setTimeout(collapse, 4500);
+  };
+  fcta.addEventListener('click', (e) => {
+    if(!fcta.classList.contains('expanded')){
+      e.preventDefault();
+      expand();
+    }
+    // if already expanded, allow default link behavior (scroll to #cta)
+  });
+  // collapse when user taps elsewhere
+  document.addEventListener('click', (e) => {
+    if(fcta.classList.contains('expanded') && !fcta.contains(e.target)){
+      collapse();
+    }
+  });
+}
 
 // Video fallback
 const v = document.getElementById('heroVideo');
