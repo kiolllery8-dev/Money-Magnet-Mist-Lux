@@ -691,6 +691,61 @@ footer{
 .footer-sub{color:var(--cream-dim);font-size:17px;letter-spacing:.25em;margin-bottom:24px;}
 .footer-meta{color:var(--muted);font-size:15px;letter-spacing:.1em;}
 
+/* ── IMAGE PLACEHOLDER SLOTS ── */
+.img-slot{
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px dashed rgba(209,168,75,.32);
+  background:radial-gradient(ellipse at 50% 40%,rgba(209,168,75,.12),transparent 70%),#070705;
+  color:rgba(209,168,75,.55);
+  font-family:'Noto Sans TC',sans-serif;
+  overflow:hidden;border-radius:2px;position:relative;
+}
+.img-slot::after{content:'';position:absolute;inset:8px;border:1px solid rgba(209,168,75,.14);pointer-events:none;}
+.img-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-slot .slot-label{text-align:center;line-height:1.65;font-size:12px;letter-spacing:.12em;padding:10px;}
+.img-slot .slot-label strong{display:block;color:var(--gold);font-size:13px;margin-bottom:4px;letter-spacing:.18em;font-weight:600;}
+.img-slot .slot-label em{display:block;font-style:normal;color:rgba(218,204,177,.6);font-size:11px;margin-top:6px;}
+
+/* Variants */
+.img-slot.square{aspect-ratio:1;}
+.img-slot.portrait{aspect-ratio:3/4;}
+.img-slot.wide{aspect-ratio:16/10;}
+.img-slot.avatar{width:100px;height:100px;border-radius:50%;}
+.img-slot.avatar::after{border-radius:50%;}
+.img-slot.master-lg{aspect-ratio:3/4;max-width:280px;margin:0 auto 28px;}
+.img-slot.teacher{aspect-ratio:1;max-width:220px;margin:0 auto 28px;border-radius:50%;}
+.img-slot.teacher::after{border-radius:50%;}
+
+/* Verse layout with energy SVG */
+.verse-energy{
+  width:120px;height:120px;margin:0 auto 28px;display:flex;align-items:center;justify-content:center;
+  opacity:.85;
+}
+.verse-energy svg{width:100%;height:100%;}
+.verse-layout{display:flex;flex-direction:column;align-items:center;gap:8px;}
+
+/* Quote band with master photo */
+.quote-inner{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:800px;margin:0 auto;padding:0 24px;}
+
+/* Ingredient with plant photo slot */
+.ing-plant-photo{margin-top:18px;}
+
+/* Testimonial avatar */
+.testi-avatar-wrap{display:flex;align-items:center;gap:14px;}
+.testi-avatar-wrap .img-slot.avatar-sm{width:62px;height:62px;border-radius:50%;flex-shrink:0;}
+.testi-avatar-wrap .img-slot.avatar-sm::after{border-radius:50%;}
+
+/* Ritual scene icons — mystical gold line art */
+.ritual-art{
+  width:100%;aspect-ratio:1;max-width:150px;margin:0 auto 22px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.ritual-art svg{width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(236,201,128,.35));}
+.ritual-art svg [stroke]{stroke:var(--gold);}
+.ritual-art svg [fill="gold-fill"]{fill:var(--gold);}
+.ritual-scene{width:100%;aspect-ratio:16/10;margin-top:18px;}
+
 /* ── RESPONSIVE ── */
 @media (max-width:960px){
   .ing-row,.ing-row:nth-child(even){grid-template-columns:1fr;gap:30px;}
@@ -864,7 +919,29 @@ footer{
 
 <!-- VERSE -->
 <section class="verse">
-  <div class="verse-inner">
+  <div class="verse-inner verse-layout">
+    <!-- 能量 / 改運符號 -->
+    <div class="verse-energy" aria-hidden="true">
+      <svg viewBox="0 0 120 120" fill="none" stroke-width="1.2">
+        <!-- 外圈光環 -->
+        <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-dasharray="2 4" opacity=".45"/>
+        <circle cx="60" cy="60" r="44" stroke="currentColor" opacity=".6"/>
+        <!-- 五芒星（改運／魔法） -->
+        <path d="M60 22 L68 47 L94 47 L73 62 L81 87 L60 72 L39 87 L47 62 L26 47 L52 47 Z" stroke="currentColor" fill="none" opacity=".9"/>
+        <!-- 內心圓 -->
+        <circle cx="60" cy="60" r="5" stroke="currentColor" fill="none"/>
+        <!-- 四方光芒 -->
+        <line x1="60" y1="0" x2="60" y2="10" stroke="currentColor" opacity=".7"/>
+        <line x1="60" y1="110" x2="60" y2="120" stroke="currentColor" opacity=".7"/>
+        <line x1="0" y1="60" x2="10" y2="60" stroke="currentColor" opacity=".7"/>
+        <line x1="110" y1="60" x2="120" y2="60" stroke="currentColor" opacity=".7"/>
+        <line x1="17" y1="17" x2="24" y2="24" stroke="currentColor" opacity=".5"/>
+        <line x1="96" y1="96" x2="103" y2="103" stroke="currentColor" opacity=".5"/>
+        <line x1="17" y1="103" x2="24" y2="96" stroke="currentColor" opacity=".5"/>
+        <line x1="96" y1="24" x2="103" y2="17" stroke="currentColor" opacity=".5"/>
+      </svg>
+    </div>
+
     <div class="verse-mark">„</div>
     <p class="eyebrow" style="margin-bottom:30px;">老師說</p>
     <p class="verse-text">
@@ -875,6 +952,15 @@ footer{
       走在路上都能撿到錢。
     </p>
     <div class="rule" style="margin:40px auto;"></div>
+
+    <!-- 塔羅老師玄空 真人照位置 -->
+    <div class="img-slot teacher" role="img" aria-label="塔羅老師真人照片預留位">
+      <span class="slot-label">
+        <strong>老師真人照</strong>
+        塔羅老師・玄空
+        <em>35–40 歲・命理專業形象</em>
+      </span>
+    </div>
     <p class="verse-source">— 塔羅老師 · 玄空</p>
   </div>
 </section>
@@ -973,15 +1059,25 @@ footer{
 
 <!-- QUOTE BAND -->
 <section class="quote-band">
-  <div class="quote-body">
-    「四味合一，<strong>正財守、偏財引、人財聚、意外財自來</strong>——<br>
-    每天噴在你身上的財氣，<br>
-    是你整個人的財運磁場，<br>
-    從此改頭換面。」
-  </div>
-  <div class="quote-author">
-    <p class="quote-name">王玄真 大師</p>
-    <p class="quote-title">中華五行風水協會 會長 · 中醫芳療大師</p>
+  <div class="quote-inner">
+    <!-- 王玄真 大師 真人照位置 -->
+    <div class="img-slot master-lg" role="img" aria-label="王玄真大師真人照片預留位">
+      <span class="slot-label">
+        <strong>大師真人照</strong>
+        王玄真 大師
+        <em>命理／芳療專業形象<br>35–45 歲</em>
+      </span>
+    </div>
+    <div class="quote-body">
+      「四味合一，<strong>正財守、偏財引、人財聚、意外財自來</strong>——<br>
+      每天噴在你身上的財氣，<br>
+      是你整個人的財運磁場，<br>
+      從此改頭換面。」
+    </div>
+    <div class="quote-author">
+      <p class="quote-name">王玄真 大師</p>
+      <p class="quote-title">中華五行風水協會 會長 · 中醫芳療大師</p>
+    </div>
   </div>
 </section>
 
@@ -1054,6 +1150,9 @@ footer{
           五行屬土，土生金——它讓你的氣場生根，不再因焦慮、恐懼而頻率飄移。
           當能量穩了，錢才敢長期停留在你身邊，正財的根基就此紮穩。
         </p>
+        <div class="img-slot wide ing-plant-photo" role="img" aria-label="岩蘭草植物照預留位">
+          <span class="slot-label"><strong>岩蘭草 · 植物照</strong>Vetiver<em>根系特寫或原株</em></span>
+        </div>
         <div class="ing-lore">
           <span class="el">土</span>
           據說岩蘭草稀釋到一定濃度時，會散發出類似鈔票印刷油墨的氣味，長久以來在芳療與玄學界都被視為「招財神器」。五行中土又生金，具有招財、開運的深層涵義。
@@ -1075,6 +1174,9 @@ footer{
           當你的心情高頻、氣場明亮，宇宙就開始把意外之財用各種方式送來：
           中獎、撿錢、天外飛來的好機會。
         </p>
+        <div class="img-slot wide ing-plant-photo" role="img" aria-label="甜橙植物照預留位">
+          <span class="slot-label"><strong>甜橙 · 植物照</strong>Sweet Orange<em>果實或花朵特寫</em></span>
+        </div>
         <div class="ing-lore">
           <span class="el">金</span>
           在東西方文化裡，橙色系植物都象徵財富與豐盛。過年擺橘子、橙花入婚禮，取的都是「金元寶」「圓滿富足」的吉意。
@@ -1096,6 +1198,9 @@ footer{
           甜羅勒守的正是人緣財：客人主動找你、貴人主動牽線，
           同時替你結界，擋掉耗財破運的能量。
         </p>
+        <div class="img-slot wide ing-plant-photo" role="img" aria-label="甜羅勒植物照預留位">
+          <span class="slot-label"><strong>甜羅勒 · 植物照</strong>Sweet Basil<em>葉片特寫或整株</em></span>
+        </div>
         <div class="ing-lore">
           <span class="el">木</span>
           在墨西哥，家家戶戶把甜羅勒掛在門口或種在門前，目的就是「招客、聚財、防小人」。噴灑於空間周圍，能強效吸引顧客進門。
@@ -1116,6 +1221,9 @@ footer{
           五行屬火，火能生土，土能生金——形成完整的財富能量循環。
           讓你無論走到哪裡都能吸引財氣，天上掉下來的機會自動被你吸引過來。
         </p>
+        <div class="img-slot wide ing-plant-photo" role="img" aria-label="廣藿香植物照預留位">
+          <span class="slot-label"><strong>廣藿香 · 植物照</strong>Patchouli<em>葉片或乾燥香料特寫</em></span>
+        </div>
         <div class="ing-lore">
           <span class="el">火</span>
           東方神秘學中，廣藿香被視為「財神腳下的香草」，能打通四方財路，讓財氣從四面八方匯聚而來。古時商人都會在店舖門口焚燒廣藿香，以吸引顧客和財運。
@@ -1138,44 +1246,76 @@ footer{
       <p class="testi-type">💰 正財 · 業績爆發</p>
       <p class="testi-quote">「六月單月破百萬業績！一噴立馬來客人，沒10分鐘立馬結帳。完全不知道發生了什麼，錢就進來了。」</p>
       <div class="testi-foot">
-        <div>
-          <p class="testi-name">李雅婷</p>
-          <p class="testi-age">40歲 · 精品店店主</p>
+        <div class="testi-avatar-wrap">
+          <div class="img-slot avatar-sm" role="img" aria-label="李雅婷真人照預留位">
+            <span class="slot-label"><strong>真人照</strong></span>
+          </div>
+          <div>
+            <p class="testi-name">李雅婷</p>
+            <p class="testi-age">40歲 · 精品店店主</p>
+          </div>
         </div>
         <p class="testi-result">業績 +300%</p>
+      </div>
+      <div class="img-slot wide" style="margin-top:18px;" role="img" aria-label="店家／店內場景照">
+        <span class="slot-label"><strong>場景照</strong>精品店內 · 客人結帳畫面</span>
       </div>
     </div>
     <div class="testi-card">
       <p class="testi-type">🍀 偏財 · 意外之財</p>
       <p class="testi-quote">「從沒中過發票的我，連續三個月中獎。尾牙還抽中三萬元！朋友說我最近運氣好得不像話。」</p>
       <div class="testi-foot">
-        <div>
-          <p class="testi-name">王美麗</p>
-          <p class="testi-age">52歲 · 家庭主婦</p>
+        <div class="testi-avatar-wrap">
+          <div class="img-slot avatar-sm" role="img" aria-label="王美麗真人照預留位">
+            <span class="slot-label"><strong>真人照</strong></span>
+          </div>
+          <div>
+            <p class="testi-name">王美麗</p>
+            <p class="testi-age">52歲 · 家庭主婦</p>
+          </div>
         </div>
         <p class="testi-result">意外收入 5萬+</p>
+      </div>
+      <div class="img-slot wide" style="margin-top:18px;" role="img" aria-label="中獎 / 發票兌獎場景">
+        <span class="slot-label"><strong>場景照</strong>中獎發票 · 紅包或禮品</span>
       </div>
     </div>
     <div class="testi-card">
       <p class="testi-type">📈 人財 · 貴人晉升</p>
       <p class="testi-quote">「噴了之後去面試，當天傍晚主管就幫我加薪了。後來更升職主管四個部門，遇到的人都在幫我。」</p>
       <div class="testi-foot">
-        <div>
-          <p class="testi-name">陳麗珠</p>
-          <p class="testi-age">35歲 · 行銷經理</p>
+        <div class="testi-avatar-wrap">
+          <div class="img-slot avatar-sm" role="img" aria-label="陳麗珠真人照預留位">
+            <span class="slot-label"><strong>真人照</strong></span>
+          </div>
+          <div>
+            <p class="testi-name">陳麗珠</p>
+            <p class="testi-age">35歲 · 行銷經理</p>
+          </div>
         </div>
         <p class="testi-result">月薪翻倍 · 晉升</p>
+      </div>
+      <div class="img-slot wide" style="margin-top:18px;" role="img" aria-label="辦公室會議／簽約場景">
+        <span class="slot-label"><strong>場景照</strong>辦公室會議 · 握手簽約</span>
       </div>
     </div>
     <div class="testi-card">
       <p class="testi-type">✨ 氣場 · 頻率轉換</p>
       <p class="testi-quote">「味道舒服高級，平靜帶給我耐心。心情不再低落，開始對金錢產生正向期待。更驚喜的是，桃花運也變好了，認識了現在的男友，他是事業有成的企業家，帶給我很多商業機會！」</p>
       <div class="testi-foot">
-        <div>
-          <p class="testi-name">鄭美齡</p>
-          <p class="testi-age">29歲 · 設計師</p>
+        <div class="testi-avatar-wrap">
+          <div class="img-slot avatar-sm" role="img" aria-label="鄭美齡真人照預留位">
+            <span class="slot-label"><strong>真人照</strong></span>
+          </div>
+          <div>
+            <p class="testi-name">鄭美齡</p>
+            <p class="testi-age">29歲 · 設計師</p>
+          </div>
         </div>
         <p class="testi-result">桃花財運雙豐收</p>
+      </div>
+      <div class="img-slot wide" style="margin-top:18px;" role="img" aria-label="設計工作室／桃花運場景">
+        <span class="slot-label"><strong>場景照</strong>咖啡館／設計桌 · 曖昧氛圍</span>
       </div>
     </div>
   </div>
@@ -1189,20 +1329,105 @@ footer{
     <div class="rule"></div>
   </div>
   <div class="ritual-grid">
+    <!-- 01 開工淨化 -->
     <div class="ritual-card">
       <div class="ritual-num">01</div>
+      <div class="ritual-art" aria-hidden="true">
+        <svg viewBox="0 0 120 120" fill="none" stroke-width="1.3" color="#d1a84b">
+          <!-- 地平線 -->
+          <line x1="10" y1="85" x2="110" y2="85" stroke="currentColor" opacity=".7"/>
+          <!-- 太陽升起 -->
+          <path d="M60 85 A 28 28 0 0 1 88 85" stroke="currentColor" fill="none"/>
+          <!-- 太陽光線 -->
+          <g stroke="currentColor" opacity=".85">
+            <line x1="60" y1="55" x2="60" y2="42"/>
+            <line x1="44" y1="63" x2="36" y2="55"/>
+            <line x1="76" y1="63" x2="84" y2="55"/>
+            <line x1="40" y1="75" x2="30" y2="75"/>
+            <line x1="80" y1="75" x2="90" y2="75"/>
+          </g>
+          <!-- 五芒星（淨化） -->
+          <path d="M60 62 L63.5 72 L74 72 L65.5 78 L69 88 L60 82 L51 88 L54.5 78 L46 72 L56.5 72 Z" stroke="currentColor" fill="none" opacity=".9"/>
+          <!-- 光波圈 -->
+          <circle cx="60" cy="85" r="48" stroke="currentColor" stroke-dasharray="3 5" opacity=".35"/>
+          <circle cx="60" cy="85" r="36" stroke="currentColor" stroke-dasharray="2 4" opacity=".45"/>
+        </svg>
+      </div>
       <h3 class="ritual-title">每天開工前，噴灑於空間</h3>
       <p class="ritual-desc">淨化磁場，為一整天建立豐盛能量場域。開工就在高頻狀態，客人自動上門。</p>
+      <div class="img-slot wide ritual-scene" role="img" aria-label="每日開工儀式情境照">
+        <span class="slot-label"><strong>情境照</strong>清晨店面 · 噴霧淨化空間</span>
+      </div>
     </div>
+
+    <!-- 02 錢包磁吸 -->
     <div class="ritual-card">
       <div class="ritual-num">02</div>
+      <div class="ritual-art" aria-hidden="true">
+        <svg viewBox="0 0 120 120" fill="none" stroke-width="1.3" color="#d1a84b">
+          <!-- 魔法陣外圈 -->
+          <circle cx="60" cy="60" r="52" stroke="currentColor" opacity=".35"/>
+          <circle cx="60" cy="60" r="46" stroke="currentColor" stroke-dasharray="2 5" opacity=".55"/>
+          <!-- 六芒星 -->
+          <path d="M60 20 L86 68 L34 68 Z" stroke="currentColor" opacity=".75"/>
+          <path d="M60 100 L34 52 L86 52 Z" stroke="currentColor" opacity=".75"/>
+          <!-- 中心金幣 $ -->
+          <circle cx="60" cy="60" r="16" stroke="currentColor" fill="none"/>
+          <circle cx="60" cy="60" r="11" stroke="currentColor" stroke-dasharray="1 2" opacity=".7"/>
+          <text x="60" y="66" text-anchor="middle" fill="#d1a84b" font-family="Playfair Display, serif" font-weight="900" font-size="16">$</text>
+          <!-- 磁吸箭頭 -->
+          <g stroke="currentColor" opacity=".7">
+            <path d="M15 60 L30 60 M26 56 L30 60 L26 64"/>
+            <path d="M105 60 L90 60 M94 56 L90 60 L94 64"/>
+            <path d="M60 15 L60 30 M56 26 L60 30 L64 26"/>
+            <path d="M60 105 L60 90 M56 94 L60 90 L64 94"/>
+          </g>
+        </svg>
+      </div>
       <h3 class="ritual-title">噴在錢包、存摺或名片上</h3>
       <p class="ritual-desc">建立你與金錢之間的正向連結。每一張名片，都帶著磁吸財氣的頻率，人脈就是錢脈。</p>
+      <div class="img-slot wide ritual-scene" role="img" aria-label="錢包 / 名片噴灑情境照">
+        <span class="slot-label"><strong>情境照</strong>皮夾 · 名片 · 存摺 · 噴霧</span>
+      </div>
     </div>
+
+    <!-- 03 貴人氣場 -->
     <div class="ritual-card">
       <div class="ritual-num">03</div>
+      <div class="ritual-art" aria-hidden="true">
+        <svg viewBox="0 0 120 120" fill="none" stroke-width="1.3" color="#d1a84b">
+          <!-- 光環 -->
+          <circle cx="60" cy="60" r="52" stroke="currentColor" opacity=".35"/>
+          <circle cx="60" cy="60" r="42" stroke="currentColor" stroke-dasharray="3 4" opacity=".55"/>
+          <!-- 八芒光 -->
+          <g stroke="currentColor" opacity=".55">
+            <line x1="60" y1="2" x2="60" y2="14"/>
+            <line x1="60" y1="106" x2="60" y2="118"/>
+            <line x1="2" y1="60" x2="14" y2="60"/>
+            <line x1="106" y1="60" x2="118" y2="60"/>
+            <line x1="16" y1="16" x2="25" y2="25"/>
+            <line x1="95" y1="95" x2="104" y2="104"/>
+            <line x1="16" y1="104" x2="25" y2="95"/>
+            <line x1="95" y1="25" x2="104" y2="16"/>
+          </g>
+          <!-- 兩個人形剪影＋握手 -->
+          <g stroke="currentColor">
+            <circle cx="42" cy="46" r="7"/>
+            <path d="M32 80 C32 66 52 66 52 80 L52 80" stroke-linecap="round"/>
+            <circle cx="78" cy="46" r="7"/>
+            <path d="M88 80 C88 66 68 66 68 80 L68 80" stroke-linecap="round"/>
+            <!-- 握手光 -->
+            <path d="M52 70 L60 64 L68 70" stroke-linecap="round"/>
+            <!-- 中心星 -->
+            <path d="M60 58 L62 63 L67 63 L63 66 L65 71 L60 68 L55 71 L57 66 L53 63 L58 63 Z" fill="#d1a84b" opacity=".85"/>
+          </g>
+        </svg>
+      </div>
       <h3 class="ritual-title">重要面試、簽約、見客戶前</h3>
       <p class="ritual-desc">披上無形的自信氣場與財富磁場。讓對方第一眼就感受到你的能量，談判更順、合作更易。</p>
+      <div class="img-slot wide ritual-scene" role="img" aria-label="面試 / 簽約 / 見客戶情境照">
+        <span class="slot-label"><strong>情境照</strong>會議室握手 · 簽約畫面</span>
+      </div>
     </div>
   </div>
 </section>
