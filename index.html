@@ -716,6 +716,14 @@ footer{
 .img-slot.teacher{aspect-ratio:1;max-width:220px;margin:0 auto 28px;border-radius:50%;}
 .img-slot.teacher::after{border-radius:50%;}
 
+/* Filled state — real image loaded */
+.img-slot.filled{
+  border:1px solid rgba(209,168,75,.45);
+  background:#000;
+  box-shadow:0 10px 28px rgba(0,0,0,.55), 0 0 18px rgba(209,168,75,.25);
+}
+.img-slot.filled::after{inset:0;border-color:rgba(209,168,75,.25);}
+
 /* Verse layout with energy SVG */
 .verse-energy{
   width:120px;height:120px;margin:0 auto 28px;display:flex;align-items:center;justify-content:center;
@@ -1150,8 +1158,8 @@ footer{
           五行屬土，土生金——它讓你的氣場生根，不再因焦慮、恐懼而頻率飄移。
           當能量穩了，錢才敢長期停留在你身邊，正財的根基就此紮穩。
         </p>
-        <div class="img-slot wide ing-plant-photo" role="img" aria-label="岩蘭草植物照預留位">
-          <span class="slot-label"><strong>岩蘭草 · 植物照</strong>Vetiver<em>根系特寫或原株</em></span>
+        <div class="img-slot wide ing-plant-photo filled" aria-label="岩蘭草植物能量視覺">
+          <img src="plant-vetiver.png" alt="岩蘭草 · 土生金 · 能量視覺">
         </div>
         <div class="ing-lore">
           <span class="el">土</span>
@@ -1174,8 +1182,8 @@ footer{
           當你的心情高頻、氣場明亮，宇宙就開始把意外之財用各種方式送來：
           中獎、撿錢、天外飛來的好機會。
         </p>
-        <div class="img-slot wide ing-plant-photo" role="img" aria-label="甜橙植物照預留位">
-          <span class="slot-label"><strong>甜橙 · 植物照</strong>Sweet Orange<em>果實或花朵特寫</em></span>
+        <div class="img-slot wide ing-plant-photo filled" aria-label="甜橙植物能量視覺">
+          <img src="plant-orange.png" alt="甜橙 · 陽光金幣 · 能量視覺">
         </div>
         <div class="ing-lore">
           <span class="el">金</span>
@@ -1198,8 +1206,8 @@ footer{
           甜羅勒守的正是人緣財：客人主動找你、貴人主動牽線，
           同時替你結界，擋掉耗財破運的能量。
         </p>
-        <div class="img-slot wide ing-plant-photo" role="img" aria-label="甜羅勒植物照預留位">
-          <span class="slot-label"><strong>甜羅勒 · 植物照</strong>Sweet Basil<em>葉片特寫或整株</em></span>
+        <div class="img-slot wide ing-plant-photo filled" aria-label="甜羅勒植物能量視覺">
+          <img src="plant-basil.png" alt="甜羅勒 · 君王守財 · 能量視覺">
         </div>
         <div class="ing-lore">
           <span class="el">木</span>
@@ -1221,8 +1229,8 @@ footer{
           五行屬火，火能生土，土能生金——形成完整的財富能量循環。
           讓你無論走到哪裡都能吸引財氣，天上掉下來的機會自動被你吸引過來。
         </p>
-        <div class="img-slot wide ing-plant-photo" role="img" aria-label="廣藿香植物照預留位">
-          <span class="slot-label"><strong>廣藿香 · 植物照</strong>Patchouli<em>葉片或乾燥香料特寫</em></span>
+        <div class="img-slot wide ing-plant-photo filled" aria-label="廣藿香植物能量視覺">
+          <img src="plant-patchouli.png" alt="廣藿香 · 四方來財 · 能量視覺">
         </div>
         <div class="ing-lore">
           <span class="el">火</span>
