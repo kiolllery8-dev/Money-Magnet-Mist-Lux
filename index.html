@@ -332,22 +332,50 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
 /* ── FLOW ── */
 .flow{background:linear-gradient(180deg,rgba(10,10,9,.85),rgba(0,0,0,.88));backdrop-filter:blur(4px);}
 .flow-header{text-align:center;max-width:720px;margin:0 auto 80px;padding:0 24px;}
-.flow-list{max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:0;}
-.flow-step{
-  display:grid;grid-template-columns:120px 1fr;gap:40px;align-items:start;
-  padding:40px 0;border-bottom:1px solid var(--line);
+.flow-list{
+  max-width:1100px;margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:40px;
 }
-.flow-step:last-child{border-bottom:0;}
+.flow-step{
+  background:rgba(0,0,0,.55);
+  border:1px solid var(--line);
+  padding:56px 44px 48px;
+  position:relative;
+  display:flex;flex-direction:column;gap:18px;
+  transition:.35s;
+  backdrop-filter:blur(6px);
+}
+.flow-step:hover{border-color:var(--gold);background:rgba(10,10,9,.7);}
+.flow-step::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.5;
+}
 .flow-num{
   font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
   font-size:115px;color:var(--gold);line-height:1;
+  letter-spacing:-.02em;margin-bottom:4px;
+  text-shadow:0 0 30px rgba(209,168,75,.35);
 }
+.flow-image{
+  width:100%;aspect-ratio:16/10;
+  background:
+    radial-gradient(ellipse at 50% 40%,rgba(209,168,75,.18),transparent 70%),
+    #050504;
+  border:1px dashed rgba(209,168,75,.22);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(209,168,75,.32);font-size:20px;letter-spacing:.3em;
+  font-family:'Playfair Display',serif;font-style:italic;
+  margin-top:8px;overflow:hidden;
+}
+.flow-image img{width:100%;height:100%;object-fit:cover;}
 .flow-en{
-  color:var(--gold-soft);font-size:19px;letter-spacing:.25em;margin-bottom:10px;
+  color:var(--gold-soft);font-size:19px;letter-spacing:.25em;margin-bottom:0;
   font-family:'Playfair Display',serif;font-style:italic;
 }
-.flow-zh{font-family:'Noto Serif TC',serif;font-size:42px;color:var(--cream);margin-bottom:14px;font-weight:500;}
-.flow-desc{color:var(--cream-dim);font-size:24px;line-height:2;}
+.flow-zh{font-family:'Noto Serif TC',serif;font-size:42px;color:var(--cream);margin:0;font-weight:600;line-height:1.3;}
+.flow-desc{color:var(--cream-dim);font-size:22px;line-height:2;margin:0;}
 .flow-desc strong{color:var(--gold-bright);font-weight:500;}
 
 /* ── INGREDIENTS DEEP DIVE ── */
@@ -525,8 +553,11 @@ footer{
   .ing-visual{max-width:340px;margin:0 auto;}
   .testi-grid{grid-template-columns:1fr;}
   .ritual-grid{grid-template-columns:1fr;}
-  .flow-step{grid-template-columns:1fr;gap:12px;}
-  .flow-num{font-size:77px;}
+  .flow-list{grid-template-columns:1fr;gap:28px;}
+  .flow-step{padding:40px 28px 36px;gap:14px;}
+  .flow-num{font-size:88px;}
+  .flow-zh{font-size:32px;}
+  .flow-desc{font-size:19px;}
 }
 @media (max-width:600px){
   .pillar-grid{grid-template-columns:1fr;}
@@ -713,47 +744,43 @@ footer{
   <div class="flow-list">
     <div class="flow-step">
       <div class="flow-num">01</div>
-      <div>
-        <p class="flow-en">STIMULUS · 嗅覺啟動</p>
-        <h3 class="flow-zh">植物分子，直達靈魂</h3>
-        <p class="flow-desc">
-          吸入高濃縮植物精油分子，香氣是宇宙中 <strong>最快速的頻率傳導器</strong>，
-          不需思考，直接作用於你的能量場。
-        </p>
-      </div>
+      <p class="flow-en">STIMULUS · 嗅覺啟動</p>
+      <h3 class="flow-zh">植物分子，直達靈魂</h3>
+      <p class="flow-desc">
+        吸入高濃縮植物精油分子，香氣是宇宙中 <strong>最快速的頻率傳導器</strong>，
+        不需思考，直接作用於你的能量場。
+      </p>
+      <div class="flow-image" aria-label="步驟 01 圖片位置"><span>IMAGE · 01</span></div>
     </div>
     <div class="flow-step">
       <div class="flow-num">02</div>
-      <div>
-        <p class="flow-en">NEUROLOGICAL SHIFT · 腦波轉換</p>
-        <h3 class="flow-zh">安撫焦慮，瞬間切換</h3>
-        <p class="flow-desc">
-          香氣直達大腦邊緣系統，<strong>瞬間安撫擔心恐懼</strong>，
-          把低迷耗損的腦波狀態，轉換為平靜清明的高頻狀態。
-        </p>
-      </div>
+      <p class="flow-en">NEUROLOGICAL SHIFT · 腦波轉換</p>
+      <h3 class="flow-zh">安撫焦慮，瞬間切換</h3>
+      <p class="flow-desc">
+        香氣直達大腦邊緣系統，<strong>瞬間安撫擔心恐懼</strong>，
+        把低迷耗損的腦波狀態，轉換為平靜清明的高頻狀態。
+      </p>
+      <div class="flow-image" aria-label="步驟 02 圖片位置"><span>IMAGE · 02</span></div>
     </div>
     <div class="flow-step">
       <div class="flow-num">03</div>
-      <div>
-        <p class="flow-en">ENERGETIC SHIFT · 頻率躍升</p>
-        <h3 class="flow-zh">氣場翻轉，財磁覺醒</h3>
-        <p class="flow-desc">
-          釋放對金錢的 <strong>匱乏感與恐懼感</strong>，
-          氣場頻率轉為純真、富饒的正能量——這是宇宙聽得懂的語言。
-        </p>
-      </div>
+      <p class="flow-en">ENERGETIC SHIFT · 頻率躍升</p>
+      <h3 class="flow-zh">氣場翻轉，財磁覺醒</h3>
+      <p class="flow-desc">
+        釋放對金錢的 <strong>匱乏感與恐懼感</strong>，
+        氣場頻率轉為純真、富饒的正能量——這是宇宙聽得懂的語言。
+      </p>
+      <div class="flow-image" aria-label="步驟 03 圖片位置"><span>IMAGE · 03</span></div>
     </div>
     <div class="flow-step">
       <div class="flow-num">04</div>
-      <div>
-        <p class="flow-en">MAGNETIC OUTPUT · 磁吸效應</p>
-        <h3 class="flow-zh">財氣自來，好運降臨</h3>
-        <p class="flow-desc">
-          能量提升改變外在際遇。<strong>客源自動上門、意外之財接連出現、貴人主動牽線</strong>——
-          宇宙用各種方式把錢送到你手上。
-        </p>
-      </div>
+      <p class="flow-en">MAGNETIC OUTPUT · 磁吸效應</p>
+      <h3 class="flow-zh">財氣自來，好運降臨</h3>
+      <p class="flow-desc">
+        能量提升改變外在際遇。<strong>客源自動上門、意外之財接連出現、貴人主動牽線</strong>——
+        宇宙用各種方式把錢送到你手上。
+      </p>
+      <div class="flow-image" aria-label="步驟 04 圖片位置"><span>IMAGE · 04</span></div>
     </div>
   </div>
 </section>
