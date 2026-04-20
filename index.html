@@ -1570,8 +1570,6 @@ footer{
   <p class="footer-sub">發 財 噴 霧 · 植 物 能 量 密 法</p>
   <p class="footer-meta">© 2026 Money Magnet Mist · All Rights Reserved</p>
 </footer>
-<!-- scroll-room spacer so nav 購買 click can place the CTA button near the top -->
-<div aria-hidden="true" style="height:130vh;background:#000;"></div>
 
 <script>
 // Floating particles
@@ -1661,15 +1659,15 @@ window.addEventListener('scroll', ()=>{
   attach(document.getElementById('ctaBtn'), 36);
   const nb = document.getElementById('navBuy');
   attach(nb, 22);
-  // nav 購買 · scroll so the purchase button sits near top (~18% from top)
+  // nav 購買 · scroll so the purchase button sits near the BOTTOM of viewport
   if(nb){
     nb.addEventListener('click', (e)=>{
       const target = document.getElementById('ctaBtn');
       if(target){
         e.preventDefault();
         const r = target.getBoundingClientRect();
-        // Place button near the top with ~120px breathing room under nav
-        const y = window.pageYOffset + r.top - 120;
+        // Place button ~120px from the bottom of the viewport
+        const y = window.pageYOffset + r.top - (window.innerHeight - r.height - 120);
         window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
       }
     });
