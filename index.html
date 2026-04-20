@@ -166,6 +166,16 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
 }
 .nav-brand small{display:block;font-size:19px;color:var(--cream-dim);letter-spacing:.3em;font-style:normal;margin-top:2px;}
 
+/* Nav Buy text stack */
+.nav-buy-text{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.1;}
+.nb-line1{font-size:15px;font-weight:800;letter-spacing:.15em;}
+.nb-line2{font-size:10px;font-weight:500;letter-spacing:.04em;opacity:.85;white-space:nowrap;}
+
+/* CTA button two-line stack */
+.cta-btn{display:inline-flex;flex-direction:column;align-items:center;gap:4px;line-height:1.25;}
+.cb-line1{display:block;font-size:inherit;}
+.cb-line2{display:block;font-size:13px;font-weight:500;letter-spacing:.08em;opacity:.8;}
+
 /* Nav Buy button (with coin icon) · gold glow */
 .nav-buy{
   display:inline-flex;align-items:center;gap:8px;
@@ -948,7 +958,10 @@ footer{
   .price-currency{font-size:14px;}
   .price-num{font-size:64px;}
   .price-unit{font-size:22px;}
-  .cta-btn{padding:16px 40px;font-size:17px;letter-spacing:.2em;}
+  .cta-btn{padding:14px 32px;font-size:17px;letter-spacing:.2em;}
+  .cb-line2{font-size:11px;letter-spacing:.04em;}
+  .nb-line1{font-size:13px;letter-spacing:.1em;}
+  .nb-line2{font-size:9px;}
   .cta-note{font-size:14px;letter-spacing:.08em;margin-top:22px;}
   .cta-badges{gap:10px;margin-top:26px;}
   .cta-badge{font-size:13px;letter-spacing:.1em;padding:6px 10px;}
@@ -986,9 +999,12 @@ footer{
     Money Magnet Mist
     <small>發 財 噴 霧</small>
   </div>
-  <a href="#ctaBtn" class="nav-buy" id="navBuy" aria-label="購買發財噴霧">
+  <a href="https://www.auslife.com.tw/products/08585bdc-4f68-4927-b42c-565b75989c76" target="_blank" rel="noopener noreferrer" class="nav-buy" id="navBuy" aria-label="購買發財噴霧">
     <span class="nav-coin" aria-hidden="true"></span>
-    <span class="nav-buy-text">購買</span>
+    <span class="nav-buy-text">
+      <span class="nb-line1">購買</span>
+      <span class="nb-line2">388 / 1入 · 2入免運</span>
+    </span>
   </a>
 </nav>
 
@@ -1553,7 +1569,10 @@ footer{
       <span class="price-num">388</span>
       <span class="price-unit">元</span>
     </div>
-    <button class="cta-btn" id="ctaBtn" type="button">立 即 入 手 · 啟 動 財 運</button>
+    <a class="cta-btn" id="ctaBtn" href="https://www.auslife.com.tw/products/08585bdc-4f68-4927-b42c-565b75989c76" target="_blank" rel="noopener noreferrer">
+      <span class="cb-line1">立 即 入 手 · 啟 動 財 運</span>
+      <span class="cb-line2">2 入免運・啟動雙倍招財儀式</span>
+    </a>
     <p class="cta-note">✦ IFA 認證配方 · 高濃縮植物精油 · 輕輕一噴立即切換財富頻率 ✦</p>
     <div class="cta-badges">
       <span class="cta-badge">岩蘭草 · 正財</span>
@@ -1659,19 +1678,7 @@ window.addEventListener('scroll', ()=>{
   attach(document.getElementById('ctaBtn'), 36);
   const nb = document.getElementById('navBuy');
   attach(nb, 22);
-  // nav 購買 · scroll so .cta-verse sits at the top of viewport
-  if(nb){
-    nb.addEventListener('click', (e)=>{
-      const target = document.getElementById('ctaVerse');
-      if(target){
-        e.preventDefault();
-        const r = target.getBoundingClientRect();
-        // Place cta-verse ~80px from the top (under fixed nav)
-        const y = window.pageYOffset + r.top - 80;
-        window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
-      }
-    });
-  }
+  // (nav 購買 opens external product page in new tab — no scroll interception)
 })();
 
 // Video fallback
