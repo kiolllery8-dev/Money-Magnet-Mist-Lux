@@ -1541,7 +1541,7 @@ footer{
       銀行裡的金庫已在你面前，<br>
       <span>你，準備好接收財富了嗎？</span>
     </h2>
-    <p class="cta-verse">
+    <p class="cta-verse" id="ctaVerse">
       正財守根基，偏財引機緣，<br>
       到哪裡都遇貴人，走在路上都是財。
     </p>
@@ -1659,15 +1659,15 @@ window.addEventListener('scroll', ()=>{
   attach(document.getElementById('ctaBtn'), 36);
   const nb = document.getElementById('navBuy');
   attach(nb, 22);
-  // nav 購買 · scroll so the purchase button sits near the BOTTOM of viewport
+  // nav 購買 · scroll so .cta-verse sits at the top of viewport
   if(nb){
     nb.addEventListener('click', (e)=>{
-      const target = document.getElementById('ctaBtn');
+      const target = document.getElementById('ctaVerse');
       if(target){
         e.preventDefault();
         const r = target.getBoundingClientRect();
-        // Place button ~120px from the bottom of the viewport
-        const y = window.pageYOffset + r.top - (window.innerHeight - r.height - 120);
+        // Place cta-verse ~80px from the top (under fixed nav)
+        const y = window.pageYOffset + r.top - 80;
         window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
       }
     });
