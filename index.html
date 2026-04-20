@@ -1659,14 +1659,15 @@ window.addEventListener('scroll', ()=>{
   attach(document.getElementById('ctaBtn'), 36);
   const nb = document.getElementById('navBuy');
   attach(nb, 22);
-  // nav 購買 · scroll so the purchase button sits at ~40% from top
+  // nav 購買 · scroll so the purchase button sits near top (~18% from top)
   if(nb){
     nb.addEventListener('click', (e)=>{
       const target = document.getElementById('ctaBtn');
       if(target){
         e.preventDefault();
         const r = target.getBoundingClientRect();
-        const y = window.pageYOffset + r.top - (window.innerHeight * 0.4) + (r.height/2);
+        // Place button near the top with ~120px breathing room under nav
+        const y = window.pageYOffset + r.top - 120;
         window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
       }
     });
