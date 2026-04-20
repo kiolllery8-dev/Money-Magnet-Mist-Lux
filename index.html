@@ -1055,7 +1055,7 @@ footer{
     Money Magnet Mist
     <small>發 財 噴 霧</small>
   </div>
-  <a href="https://www.auslife.com.tw/products/08585bdc-4f68-4927-b42c-565b75989c76" target="_blank" rel="noopener noreferrer" class="nav-buy" id="navBuy" aria-label="購買發財噴霧">
+  <a href="#ctaVerse" class="nav-buy" id="navBuy" aria-label="購買發財噴霧">
     <span class="nav-coin" aria-hidden="true"></span>
     <span class="nav-buy-text">
       <span class="nb-line1">購買</span>
@@ -1736,7 +1736,18 @@ window.addEventListener('scroll', ()=>{
   attach(document.getElementById('ctaBtn'), 36);
   const nb = document.getElementById('navBuy');
   attach(nb, 22);
-  // (nav 購買 opens external product page in new tab — no scroll interception)
+  // nav 購買 · in-page smooth scroll so .cta-verse sits at top of viewport
+  if(nb){
+    nb.addEventListener('click', (e)=>{
+      const target = document.getElementById('ctaVerse');
+      if(target){
+        e.preventDefault();
+        const r = target.getBoundingClientRect();
+        const y = window.pageYOffset + r.top - 80;
+        window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+      }
+    });
+  }
 })();
 
 // Video fallback
