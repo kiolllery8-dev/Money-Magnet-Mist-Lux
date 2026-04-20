@@ -618,6 +618,17 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
 /* ── RITUAL ── */
 .ritual{background:rgba(0,0,0,.82);border-top:1px solid var(--line);backdrop-filter:blur(4px);}
 .ritual-header{text-align:center;max-width:720px;margin:0 auto 80px;padding:0 24px;}
+.ritual-product{max-width:180px;margin:40px auto 0;position:relative;}
+.ritual-product img{filter:drop-shadow(0 12px 28px rgba(209,168,75,.45));}
+.ritual-product::after{
+  content:'';position:absolute;inset:-16px;z-index:-1;
+  background:radial-gradient(circle,rgba(209,168,75,.3),transparent 70%);
+  animation:glow 3s ease-in-out infinite;
+}
+.ritual-product-caption{
+  margin-top:14px;color:var(--gold);font-size:14px;letter-spacing:.3em;
+  font-family:'Noto Serif TC',serif;
+}
 .ritual-grid{
   max-width:1100px;margin:0 auto;padding:0 24px;
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
@@ -1405,6 +1416,10 @@ footer{
     <p class="eyebrow">日常儀式</p>
     <h2 class="section-title" style="margin-top:14px;">三個時機，讓財氣跟著你</h2>
     <div class="rule"></div>
+    <div class="ritual-product">
+      <img src="product.png" alt="發財噴霧 10ml">
+      <p class="ritual-product-caption">發 財 噴 霧 · 10ml</p>
+    </div>
   </div>
   <div class="ritual-grid">
     <!-- 01 開工淨化 -->
