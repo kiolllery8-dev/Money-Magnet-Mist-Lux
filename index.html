@@ -683,6 +683,7 @@ section,.section{padding:clamp(80px,10vw,140px) 0;position:relative;}
   color:var(--gold);font-size:clamp(90px,12.8vw,141px);line-height:1;
 }
 .price-unit{color:var(--gold);font-size:41px;}
+#ctaBtn{scroll-margin-top:100px;}
 .cta-btn{
   display:inline-block;
   background:linear-gradient(145deg,#ecc980 0%,#d1a84b 45%,#b8941f 100%);
@@ -985,7 +986,7 @@ footer{
     Money Magnet Mist
     <small>發 財 噴 霧</small>
   </div>
-  <a href="#cta" class="nav-buy" id="navBuy" aria-label="購買發財噴霧">
+  <a href="#ctaBtn" class="nav-buy" id="navBuy" aria-label="購買發財噴霧">
     <span class="nav-coin" aria-hidden="true"></span>
     <span class="nav-buy-text">購買</span>
   </a>
@@ -1656,7 +1657,20 @@ window.addEventListener('scroll', ()=>{
     });
   }
   attach(document.getElementById('ctaBtn'), 36);
-  attach(document.getElementById('navBuy'), 22);
+  const nb = document.getElementById('navBuy');
+  attach(nb, 22);
+  // nav 購買 · scroll to actual purchase button (center it in viewport)
+  if(nb){
+    nb.addEventListener('click', (e)=>{
+      const target = document.getElementById('ctaBtn');
+      if(target){
+        e.preventDefault();
+        const r = target.getBoundingClientRect();
+        const y = window.pageYOffset + r.top - (window.innerHeight/2) + (r.height/2);
+        window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+      }
+    });
+  }
 })();
 
 // Video fallback
